@@ -1,0 +1,76 @@
+<div class="tooltip">
+    <mat-toolbar-row>
+        <span class="titulo">Implementação </span>
+        <span class="example-spacer"></span>
+        <button matButton="filled" (click)="add()">Adicionar</button>
+    </mat-toolbar-row>
+</div>
+
+
+<div class="table">
+    <table mat-table [dataSource]="data">
+
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> Id </th>
+            <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="idProjeto">
+            <th mat-header-cell *matHeaderCellDef> Id do Projeto </th>
+            <td mat-cell *matCellDef="let element"> {{ element.idProjeto }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descricao">
+            <th mat-header-cell *matHeaderCellDef> Descrição </th>
+            <td mat-cell *matCellDef="let element"> {{ element.descricao }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataInicio">
+            <th mat-header-cell *matHeaderCellDef> Data de Inicio </th>
+            <td mat-cell *matCellDef="let element"> {{ element.dataInicio | date }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dataFim">
+            <th mat-header-cell *matHeaderCellDef>Data de fim</th>
+            <td mat-cell *matCellDef="let element"> {{ element.dataFim | date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="desenvolvedorResponsavel">
+            <th mat-header-cell *matHeaderCellDef>Desenvolvedor Responsável</th>
+            <td mat-cell *matCellDef="let element"> {{ element.desenvolvedorResponsavel }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="versaoGerada">
+            <th mat-header-cell *matHeaderCellDef>Versão gerada</th>
+            <td mat-cell *matCellDef="let element"> {{ element.versaoGerada }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let element"> {{ conversaoStatusParaTexto(element.status) }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acao">
+            <th mat-header-cell *matHeaderCellDef> Ação </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="edit(element)">
+                        <mat-icon>edit</mat-icon>
+                        <span>Editar</span>
+                    </button>
+                    <button mat-menu-item (click)="delete(element)">
+                        <mat-icon>delete</mat-icon>
+                        <span>Excluir</span>
+                    </button>
+                </mat-menu>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>

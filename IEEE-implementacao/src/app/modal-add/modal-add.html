@@ -1,0 +1,88 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<form [formGroup]="form">
+    <div class="example-container">
+        <mat-form-field>
+            <mat-label>Id do Projeto</mat-label>
+            <input matInput placeholder="1234" formControlName="idProjeto" required />
+            <mat-error *ngIf="form.get('idProjeto')?.invalid && form.get('idProjeto')?.touched">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="example-container">
+        <mat-form-field>
+            <mat-label>Descrição</mat-label>
+            <input matInput placeholder="A fase de implemen..." formControlName="descricao" required />
+            <mat-error *ngIf="form.get('descricao')?.invalid && form.get('descricao')?.touched">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <!-- Data de início -->
+    <mat-form-field>
+        <mat-label>Data de início</mat-label>
+        <input matInput [matDatepicker]="pickerInicio" formControlName="dataInicio">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerInicio"></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+
+        <mat-error *ngIf="form.get('dataInicio')?.invalid && form.get('dataInicio')?.touched">
+            Campo obrigatório
+        </mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <!-- Data de fim -->
+    <mat-form-field>
+        <mat-label>Data de fim</mat-label>
+        <input matInput [matDatepicker]="pickerFim" formControlName="dataFim">
+        <mat-datepicker-toggle matIconSuffix [for]="pickerFim"></mat-datepicker-toggle>
+        <mat-datepicker #pickerFim></mat-datepicker>
+
+        <mat-error *ngIf="form.get('dataFim')?.invalid && form.get('dataFim')?.touched">
+            Campo obrigatório
+        </mat-error>
+    </mat-form-field>
+
+
+    <div class="example-container">
+        <mat-form-field>
+            <mat-label>Desenvolvedor Responsável</mat-label>
+            <input matInput placeholder="Keylla Paixão" formControlName="desenvolvedorResponsavel" required />
+            <mat-error *ngIf="form.get('desenvolvedorResponsavel')?.invalid && form.get('desenvolvedorResponsavel')?.touched">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="example-container">
+        <mat-form-field>
+            <mat-label>Versão gerada</mat-label>
+            <input matInput placeholder="1.0.0.0" formControlName="versaoGerada" required />
+            <mat-error *ngIf="form.get('versaoGerada')?.invalid && form.get('versaoGerada')?.touched">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="example-container">
+        <mat-form-field >
+            <mat-label>Status</mat-label>
+            <mat-select formControlName="status" [compareWith]="selectValue">
+                <mat-option [value]="1">Em andamento</mat-option>
+                <mat-option [value]="2">Teste</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-error *ngIf="form.get('status')?.invalid && form.get('status')?.touched">
+            Campo obrigatório
+        </mat-error>
+    </div>
+
+</form>
+<mat-dialog-actions>
+    <button matButton mat-dialog-close (click)="close()">Cancelar</button>
+    <button matButton cdkFocusInitial (click)="submitForm()">Salvar</button>
+</mat-dialog-actions>
